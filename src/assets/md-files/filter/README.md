@@ -1,6 +1,6 @@
 # Material Table Filter (matTableFilter Directive)
 
-[![JavaScript Style Guide: Good Parts](https://img.shields.io/badge/code%20style-goodparts-brightgreen.svg?style=flat)](https://github.com/dwyl/goodparts "JavaScript The Good Parts")  [![Node version](https://img.shields.io/npm/v/mat-table-filter.svg?style=flat)](https://www.npmjs.com/package/mat-table-filter)  ![Total Downloads](https://img.shields.io/npm/dm/mat-table-filter.svg)
+[![Node version](https://img.shields.io/npm/v/mat-table-filter.svg?style=for-the-badge&logo=npm)](https://www.npmjs.com/package/mat-table-filter)  ![Total Downloads](https://img.shields.io/npm/dm/mat-table-filter.svg?style=for-the-badge)
 
 Provides filtering support for @angular/material tables. Table filtering is done by using the directive matTableFilter. This project is inspired by Hibernate's example api.
 By employing this directive you will end up with having
@@ -11,11 +11,16 @@ By employing this directive you will end up with having
 ## Installation
 
 ```
-npm install --save mat-table-filter
+npm install mat-table-filter
 ```
-NOTE: For the previous major versions of Angular install version 1.2.5
+NOTE: Angular versions older than Angular 8 should install mat-table-filter@1.2.5
 ```
-npm install --save mat-table-filter@1.2.5
+npm install mat-table-filter@1.2.5
+```
+
+For Angular versions between 8-13 (inclusive), please install mat-table-filter@10.2.4
+```
+npm install mat-table-filter@10.2.4
 ```
 
 After installing mat-table-filter import MatTableFilterModule in your ngModule
@@ -51,9 +56,22 @@ That's all. When you populate the exampleObject's properties, the filter will au
 You can change the debounce time also.
 
 &nbsp;
+
 ### Stackblitz demo [mat-table-filter-example](https://stackblitz.com/github/HalitTalha/mat-table-filter-example)
+
 &nbsp;
 
+## Support & Donations
+
+Feel free to show your support. Donating supporters will be added into *Supporters* section inside the **README.md** of the repository.
+
+[![GitHub Org's stars](https://img.shields.io/github/stars/HalitTalha/ng-material-extensions?logo=Github&style=for-the-badge)](https://github.com/HalitTalha/ng-material-extensions/stargazers) -> **Become a star-gazer, giving a star at Github** 
+
+
+[![Crypto Donation](https://img.shields.io/badge/_-DONATE-4d4d4e?logo=bitcoin&style=for-the-badge)](https://commerce.coinbase.com/checkout/3643d820-81aa-46ca-9973-877c1184e082) -> **Donate in crypto currencies**
+
+
+&nbsp;
 ## Licence
 
 Apache-2.0

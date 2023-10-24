@@ -1,5 +1,5 @@
 import { PropertyOptions } from './property-options';
-import { Directive, DoCheck, Input, ViewContainerRef, Host, Self, Optional } from '@angular/core';
+import { Directive, DoCheck, Input, Host, Self, Optional } from '@angular/core';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { BehaviorSubject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
@@ -42,7 +42,7 @@ export class MatTableFilterDirective implements DoCheck {
 
 
   private initDebounceSubject() {
-    this._exampleEntitySubject = new BehaviorSubject<void>(null);
+    this._exampleEntitySubject = new BehaviorSubject<void>(undefined);
     this._exampleEntitySubject.pipe(
       debounceTime(this.debounceTime))
       .subscribe(_ => {

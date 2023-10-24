@@ -6,27 +6,23 @@
     "type": "git",
     "url": "https://github.com/HalitTalha/mat-table-extensions/tree/master/projects/mat-table-filter"
   },
-  "version": "9.0.1",
+  "version": "14.0.0",
   "description": "Provides filtering support for @angular/material tables",
   "homepage": "https://halittalha.github.io/ng-material-extensions/",
   "peerDependencies": {
-    "@angular/common": "^9.0.0",
-    "@angular/core": "^9.0.0",
-    "@angular/cdk": "^9.0.0",
-    "@angular/material": "^9.0.0"
+    "@angular/cdk": "^14.2.7",
+    "@angular/material": "^14.2.7",
+    "@angular/common": "^14.2.0",
+    "@angular/core": "^14.2.0"
   },
   "dependencies": {
-    "@types/lodash": "^4.14.138",
-    "lodash": "^4.17.15"
+    "lodash-es": "^4.17.21",
+    "tslib": "^2.3.0"
   },
   "devDependencies": {
-    "@angular/cdk": "^9.0.0",
-    "@angular/material": "^9.0.0",
-    "goodparts": "^1.2.1"
+    "@types/lodash-es": "^4.17.6"
   },
-  "scripts": {
-    "lint": "node_modules/.bin/goodparts lib"
-  },
+  "sideEffects": false,
   "keywords": [
     "angular",
     "material",

@@ -1,5 +1,5 @@
 import { DataRowOutlet } from '@angular/cdk/table';
-import { Directive, EventEmitter, Input, Output, Renderer2 } from '@angular/core';
+import { Directive, EventEmitter, Input, Output } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 import { ExportType } from './export-type';
 import { ExcelOptions, Options, TxtOptions } from './options';
@@ -31,15 +31,16 @@ export abstract class CdkTableExporter {
 
   private _isExporting: boolean;
 
-  private _subscription: Subscription;
+  private _subscription: Subscription | undefined;
 
   private _options?: Options;
 
+  private _selectedRows: Array<number>;
+
   constructor(
-    protected renderer: Renderer2,
     private serviceLocator: ServiceLocatorService,
     private dataExtractor: DataExtractorService,
-    protected _cdkTable: any,
+    protected _cdkTable: any
   ) {}
 
   /**
@@ -48,9 +49,19 @@ export abstract class CdkTableExporter {
   public abstract getPageCount(): number;
 
   /**
+   * Must return the number of items to display on a page
+   */
+  public abstract getPageSize(): number;
+
+  /**
    * Must return the index of the current page that's displayed
    */
   public abstract getCurrentPageIndex(): number;
+
+  /**
+   * Must return the total number of items in the table
+   */
+  public abstract getTotalItemsCount(): number;
 
   /**
    * When called, the CdkTable should render the rows inside the page whose index given as parameter
@@ -61,8 +72,7 @@ export abstract class CdkTableExporter {
   /**
    * Must return an observable that notifies the subscribers about page changes
    */
-  public abstract getPageChangeObservable(): Observable<any>;
-
+  public abstract getPageChangeObservable(): Observable<any> | undefined;
 
   /**
    * Triggers page event chain thus extracting and exporting all the rows in nativetables in pages
@@ -82,12 +92,36 @@ export abstract class CdkTableExporter {
     }
   }
 
-  private loadExporter(exportType: any) {
-    if (exportType === ExportType.OTHER.valueOf()) {
-      this._exporterService = this.exporter;
+  toggleRow(index: number): void {
+    const paginatedRowIndex: number = this.getPaginatedRowIndex(index);
+    if (this.isToggleOn(paginatedRowIndex)) {
+      this.toggleOff(paginatedRowIndex);
     } else {
-      this._exporterService = this.serviceLocator.getService(exportType);
+      this.toggleOn(paginatedRowIndex);
     }
+  }
+
+  /**
+   * This event will clear rows selection done using toggleRow functionality
+   */
+  resetToggleRows() {
+    this._selectedRows = [];
+  }
+
+  private toggleOn(index: number) {
+    this._selectedRows = [...(this._selectedRows || []), index];
+  }
+
+  private toggleOff(index: number) {
+    this._selectedRows =  this._selectedRows.filter(x => x !== index);
+  }
+
+  private isToggleOn(index: number): boolean {
+    return this._selectedRows?.includes(index);
+  }
+
+  private loadExporter(exportType: any) {
+    this._exporterService = this.serviceLocator.getService(exportType, this.exporter);
   }
 
   private exportWithPagination() {
@@ -103,12 +137,37 @@ export abstract class CdkTableExporter {
   }
 
   private extractDataOnCurrentPage() {
-    this._data = this._data.concat(this.dataExtractor.extractRows(this._cdkTable, this.hiddenColumns));
+    const rows = this.dataExtractor.extractRows(this._cdkTable, this.hiddenColumns);
+    this._data = this._data.concat(this.getSelectedRows(rows));
+  }
+
+  private getSelectedRows(rows: Array<any>) {
+    if (this.isSelectiveExport()) {
+      return rows.filter((_, i) => this._selectedRows.includes(this.getPaginatedRowIndex(i)));
+    } else {
+      return rows;
+    }
+  }
+
+  private isSelectiveExport(): boolean {
+    return this._selectedRows && !this.isMasterToggleOff() &&  !this.isMasterToggleOn();
+  }
+
+  private isMasterToggleOn(): boolean {
+    return this.compareSelectedRowCount(this.getTotalItemsCount());
+  }
+
+  private isMasterToggleOff(): boolean {
+    return this.compareSelectedRowCount(0);
+  }
+
+  private compareSelectedRowCount(rowCount: number): boolean {
+    return !!(this._selectedRows.length === rowCount);
   }
 
   private initPageHandler(): void {
     if (!this._subscription) {
-      this._subscription = this.getPageChangeObservable().subscribe(() => {
+      this._subscription = this.getPageChangeObservable()?.subscribe(() => {
         setTimeout(() => {
           if (this._isIterating) {
             this.extractDataOnCurrentPage();
@@ -134,22 +193,19 @@ export abstract class CdkTableExporter {
     this.exportCompleted.emit();
   }
 
-  private extractSpecialRow(outlet: DataRowOutlet) {
-    const row = this.dataExtractor.extractRow(this._cdkTable, this.hiddenColumns, outlet);
-    if (row) {
-      this._data.push(row);
-    }
+  private extractSpecialRows(outlet: DataRowOutlet) {
+    this._data.push(...this.dataExtractor.extractRows(this._cdkTable, this.hiddenColumns, outlet));
   }
 
   private extractTableHeader() {
-    this.extractSpecialRow(this._cdkTable._headerRowOutlet);
+    this.extractSpecialRows(this._cdkTable._headerRowOutlet);
   }
 
   private extractTableFooter() {
-    this.extractSpecialRow(this._cdkTable._footerRowOutlet);
+    this.extractSpecialRows(this._cdkTable._footerRowOutlet);
   }
 
-  public hasNextPage(): boolean {
+  private hasNextPage(): boolean {
     if (this.getCurrentPageIndex() < this.getPageCount() - 1) {
       return true;
     } else {
@@ -157,9 +213,11 @@ export abstract class CdkTableExporter {
     }
   }
 
-  public nextPage(): void {
+  private nextPage(): void {
     this.goToPage(this.getCurrentPageIndex() + 1);
   }
 
+  private getPaginatedRowIndex(index: number): number {
+    return index + (this.getPageSize() * this.getCurrentPageIndex());
+  }
 }
-

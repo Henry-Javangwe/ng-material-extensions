@@ -1,5 +1,5 @@
 
-import { MatTableFilterModule } from 'mat-table-filter';
+//import { MatTableFilterModule } from 'mat-table-filter';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -16,7 +16,6 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatTableExporterModule } from 'mat-table-exporter';
@@ -33,15 +32,15 @@ import { PropertyOptionsComponent } from './components/examples/property-options
 import { BriefExporterComponent } from './components/examples/brief-exporter/brief-exporter.component';
 import { CustomExporterComponent } from './components/examples/custom-exporter/custom-exporter.component';
 import { MatChipsModule } from '@angular/material/chips';
+import { SelectionExporterComponent } from './components/examples/selection-exporter/selection-exporter.component';
+import { MatTableFilterModule } from 'mat-table-filter';
 
 export function markedOptions(): MarkedOptions {
 
   return {
     gfm: true,
-    tables: true,
     breaks: false,
     pedantic: false,
-    sanitize: false,
     smartLists: true,
     smartypants: false,
   };
@@ -59,7 +58,8 @@ export function markedOptions(): MarkedOptions {
     SimpleFilterComponent,
     PropertyOptionsComponent,
     BriefExporterComponent,
-    CustomExporterComponent
+    CustomExporterComponent,
+    SelectionExporterComponent
   ],
   imports: [
     HttpClientModule,
@@ -98,6 +98,7 @@ export function markedOptions(): MarkedOptions {
     CustomExporterComponent,
     SimpleFilterComponent,
     PropertyOptionsComponent,
+    SelectionExporterComponent
 
   ]
 })

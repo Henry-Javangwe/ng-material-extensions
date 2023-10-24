@@ -1,5 +1,6 @@
 import { ExportType } from './export-type';
 import { Mime } from './mime';
+import { InjectionToken } from '@angular/core';
 
 export const MAT_TABLE_EXPORTER = 'mat-table-exporter';
 export const TYPE_ARRAY = 'array';
@@ -9,6 +10,7 @@ export const CONTENT_TYPE_TEXT = ExportType.TXT + '/';
 export const CONTENT_TYPE_APPLICATION = 'application/';
 export const CONTENT_TYPE_EXCEL = CONTENT_TYPE_APPLICATION + 'octet-stream';
 export const DOT = '.';
+export const COMMA = ',';
 export const EXTENSION_XLS = DOT + ExportType.XLS;
 export const EXTENSION_XLSX =  DOT + ExportType.XLSX;
 export const EXTENSION_CSV =  DOT + ExportType.CSV;
@@ -24,3 +26,5 @@ export const XLS_REGEX = DOT + '*\.' + ExportType.XLS + '$';
 export const RETURN = '\n';
 export const TAB = '\t';
 export const XLSX_COLS = '!cols';
+export const BOM = '\uFEFF';
+export const XLSX_LIGHTWEIGHT = new InjectionToken<boolean>('XLSX_LIGHTWEIGHT');

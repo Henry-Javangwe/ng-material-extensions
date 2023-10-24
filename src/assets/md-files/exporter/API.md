@@ -17,6 +17,8 @@
 | Method | Description    |
 |----------|-------------|
 | `exportTable(exportType?: ExportType, options?: Options)`   | Called to trigger the export of MatTable|
+| `toggleRow(index: number)`   | Called to mark the row for selection export, if the requirement is to export only selected rows. Having no rows selected means export everything |
+| `resetToggleRow()` | Resets all the rows toggled for exporting |
 
 &nbsp;
 
@@ -43,6 +45,15 @@ export enum ExportType {
 
 &nbsp;
 
+### TxtOptions
+Extends the common Options interface.
+
+| Property | Type   | Description |
+|----------|--------|-------------|
+| delimiter | `string` |(Optional) Field separator @default `,`|
+
+&nbsp;
+
 ### ExcelOptions
 ExcelOptions wraps the WritingOptions of sheetjs library. All other export types share the common Options interface. In the next releases, options will be enriched for the other export types.
 
@@ -56,7 +67,24 @@ ExcelOptions wraps the WritingOptions of sheetjs library. All other export types
 | ignoreEC | `boolean` |(Optional) Suppress "number stored as text" errors in generated files @default true|
 | Props | `Properties` |(Optional) Workbook properties like *Author, Title, Subject* etc.|
 | columnWidths | `Array<number>` | (Optional) Column widths in maximum char  |
+
 &nbsp;
+
+
+## Bundle Size
+Xlsx (sheetjs) is a core dependency of the package. Since it is built as a CommonJs module, proper tree-shaking is not available during the builds. That's why **mat-table-exporter** loads Xlsx dependencies dynamically since **v10.2.3**.
+
+Even if Xlsx is loaded dynamically, it is heavy by nature. If you'd like to benefit the extra minified version of xlsx (**xlsx.mini.min**; Doesn't support some features like **.xls** exporting) you can configure the module as shown below:
+
+```
+@NgModule({
+  imports: [
+    ...
+    MatTableExporterModule.forRoot({xlsxLightWeight: true}),
+  ],
+ ]})
+```
+
 
 ## Contributing
 This project is a library project inside ng-material-extensions angular workspace. If you are interested in the source code of this particular library you can get ready and build the project by applying the steps below:
