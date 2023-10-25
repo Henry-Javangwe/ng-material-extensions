@@ -84,19 +84,25 @@ h2 {
   }
 }
 
-::ng-deep .docs-tabs > .mat-tab-header {
+::ng-deep .docs-tabs > .mat-mdc-tab-header {
   background-color: #3f51b5 !important;
 }
 
-::ng-deep .docs-tabs > .mat-tab-header > .mat-tab-label-container > .mat-tab-list > .mat-ink-bar {
+/*TODO(mdc-migration): The following rule targets internal classes of tabs that may no longer apply for the MDC version.
+  */
+::ng-deep .docs-tabs > .mat-mdc-tab-header > .mat-tab-label-container > .mat-tab-list > .mat-ink-bar {
   background-color: #fff !important;
   height: 4px;
 }
 
-::ng-deep .docs-tabs > .mat-tab-header > .mat-tab-label-container > .mat-tab-list > .mat-tab-labels > .mat-tab-label > .mat-tab-label-content {
+/*TODO(mdc-migration): The following rule targets internal classes of tabs that may no longer apply for the MDC version.
+  */
+::ng-deep .docs-tabs > .mat-mdc-tab-header > .mat-tab-label-container > .mat-tab-list > .mat-tab-labels > .mat-tab-label > .mat-tab-label-content {
   color: #fff !important;
 }
 
-::ng-deep .docs-tabs > .mat-tab-header > .mat-tab-label-container > .mat-tab-list > .mat-tab-labels > .mat-tab-label-active {
+/*TODO(mdc-migration): The following rule targets internal classes of tabs that may no longer apply for the MDC version.
+  */
+::ng-deep .docs-tabs > .mat-mdc-tab-header > .mat-tab-label-container > .mat-tab-list > .mat-tab-labels > .mat-tab-label-active {
   opacity: 1;
 }

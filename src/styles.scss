@@ -30,7 +30,7 @@ $mte-landing-theme: mat-light-theme($mte-landing-primary, $mte-landing-accent, $
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
-.mat-tab-header {margin-bottom: 12px;}
+.mat-mdc-tab-header {margin-bottom: 12px;}
 h1 {font-weight: bold !important;}
 .docs-page{
   padding-left: 100px;

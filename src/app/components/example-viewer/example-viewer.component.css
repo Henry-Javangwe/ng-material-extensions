@@ -48,6 +48,7 @@
   overflow: auto;
 }
 
-::ng-deep .docs-source-tabs > .mat-tab-header > .mat-tab-label-container > .mat-tab-list > .mat-tab-labels {
+/* TODO(mdc-migration): The following rule targets internal classes of tabs that may no longer apply for the MDC version. */
+::ng-deep .docs-source-tabs > .mat-mdc-tab-header > .mat-tab-label-container > .mat-tab-list > .mat-tab-labels {
   justify-content: flex-start !important;
 }

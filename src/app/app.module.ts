@@ -91,15 +91,15 @@ export function markedOptions(): MarkedOptions {
   ],
   providers: [],
   bootstrap: [AppComponent],
-  entryComponents: [
-    ArrayFilterComponent,
-    BriefExporterComponent,
-    CustomColumnFilterComponent,
-    CustomExporterComponent,
-    SimpleFilterComponent,
-    PropertyOptionsComponent,
-    SelectionExporterComponent
+  // entryComponents: [
+  //   ArrayFilterComponent,
+  //   BriefExporterComponent,
+  //   CustomColumnFilterComponent,
+  //   CustomExporterComponent,
+  //   SimpleFilterComponent,
+  //   PropertyOptionsComponent,
+  //   SelectionExporterComponent
 
-  ]
+  // ]
 })
 export class AppModule { }
