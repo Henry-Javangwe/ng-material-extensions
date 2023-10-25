@@ -4,35 +4,16 @@
   "compilerOptions": {
     "baseUrl": "./",
     "paths": {
-      "cdk-table-exporter": [
-        "dist/cdk-table-exporter"
-      ],
-      "cdk-table-exporter/*": [
-        "dist/cdk-table-exporter/*"
-      ],
-      "mat-table-exporter": [
-        "dist/mat-table-exporter"
-      ],
-      "mat-table-exporter/*": [
-        "dist/mat-table-exporter/*"
-      ],
-      "mat-table-filter": [
-        "dist/mat-table-filter"
-      ],
-      "mat-table-filter/*": [
-        "dist/mat-table-filter/*"
-      ],
-      "example-components": [
-        "dist/example-components"
-      ],
-      "example-components/*": [
-        "dist/example-components/*"
-      ]
+      "cdk-table-exporter": ["dist/cdk-table-exporter"],
+      "cdk-table-exporter/*": ["dist/cdk-table-exporter/*"],
+      "mat-table-exporter": ["dist/mat-table-exporter"],
+      "mat-table-exporter/*": ["dist/mat-table-exporter/*"],
+      "mat-table-filter": ["dist/mat-table-filter"],
+      "mat-table-filter/*": ["dist/mat-table-filter/*"],
+      "example-components": ["dist/example-components"],
+      "example-components/*": ["dist/example-components/*"]
     },
-    "typeRoots": [
-      "./typings",
-      "node_modules/@types"
-    ],
+    "typeRoots": ["./typings", "node_modules/@types"],
     "strictPropertyInitialization": false,
     "outDir": "./dist/out-tsc",
     "forceConsistentCasingInFileNames": true,
@@ -50,15 +31,20 @@
     "target": "ES2022",
     "module": "ES2022",
     "useDefineForClassFields": false,
-    "lib": [
-      "ES2022",
-      "dom"
-    ]
+    "lib": ["ES2022", "dom"]
   },
+  "include": [
+    "src/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ],
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
     "strictInjectionParameters": true,
     "strictInputAccessModifiers": true,
     "strictTemplates": true
-  }
+  },
+  "about:exclude:_unused": "Excluding from Typescript Checks for now",
+  "about:skipLibCheck": "https://github.com/angular/protractor/issues/5348#issuecomment-575830322"
 }

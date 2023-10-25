@@ -10,7 +10,8 @@
       "cdk-table-exporter"
     ],
   },
+  "include": ["./src/**/*.ts"],
   "exclude": [
     "**/*.spec.ts"
-  ]
+  ],
 }
