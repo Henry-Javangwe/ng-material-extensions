@@ -7,7 +7,7 @@
     "declarationMap": true,
     "inlineSources": true,
     "types": [
-      "cdk-table-exporter"
+      "../../dist/cdk-table-exporter"
     ],
   },
   "include": ["./src/**/*.ts"],
